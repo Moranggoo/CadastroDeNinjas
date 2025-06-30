@@ -2,9 +2,17 @@ package io.piratex.CadastroDeNinjas.Missoes;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/missoes")
 public class MissoesController {
+
+    private MissoesService missoesService;
+
+    public MissoesController(MissoesService missoesService) {
+        this.missoesService = missoesService;
+    }
 
     @GetMapping("/rotamissoes")
     public String rotaMissoes() {
@@ -17,8 +25,8 @@ public class MissoesController {
     }
 
     @GetMapping("/listar")
-    public String listarMissoes() {
-        return "Missoes: ";
+    public List<MissoesModel> listarMissoes() {
+        return missoesService.listarMissoes();
     }
 
     @PostMapping("/alterar")

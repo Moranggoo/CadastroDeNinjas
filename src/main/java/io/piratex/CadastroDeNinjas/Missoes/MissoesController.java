@@ -34,9 +34,9 @@ public class MissoesController {
         return "Missao alterada";
     }
 
-    @DeleteMapping("/deletar")
-    public String deletarMissoes() {
-        return "Missao deletada";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarMissoes(@PathVariable Long id) {
+        missoesService.deletarMissoes(id);
     }
 
 }

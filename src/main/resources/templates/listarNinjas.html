@@ -1,0 +1,140 @@
+<!DOCTYPE>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Listar Ninjas</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #eee;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #e53935;
+            border-bottom: 2px solid #333;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #1c1c1c;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #222;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            color: #f44336;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        tbody tr:hover {
+            background-color: #2a2a2a;
+        }
+
+        img {
+            border-radius: 10%;
+            border: 2px solid #555;
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px 3px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            transform: scale(1.05);
+        }
+
+        a:nth-child(1) {
+            background-color: #1e88e5; /* Azul */
+        }
+
+        a:nth-child(1):hover {
+            background-color: #1565c0;
+        }
+
+        a:nth-child(2) {
+            background-color: #fbc02d; /* Amarelo */
+            color: #000;
+        }
+
+        a:nth-child(2):hover {
+            background-color: #f9a825;
+            color: #000;
+        }
+
+        a:nth-child(3) {
+            background-color: #e53935; /* Vermelho */
+        }
+
+        a:nth-child(3):hover {
+            background-color: #b71c1c;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Lista de Ninjas</h1>
+    <a th:href="@{/ninjas/ui/adicionar}">Cadastrar novo ninja</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Imagem</th>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+                <th>Rank</th>
+                <th>Missoes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "ninja: ${ninjas}">
+                <td> <img th:src="${ninja.imgUrl}" width="100px" height="100px"></td>
+                <td th:text="${ninja.id}"></td>
+                <td th:text="${ninja.nome}"></td>
+                <td th:text="${ninja.email}"></td>
+                <td th:text="${ninja.idade}"></td>
+                <td th:text="${ninja.rank}"></td>
+
+                <td>
+                    <span th:if="${ninja.missoes}"><span th:text="${ninja.missoes.nome}"></span>, Dificuldade: <span th:text="${ninja.missoes.dificuldade}"></span></span>
+                    <span th:if="${ninja.missoes == null}">Sem Missões cadastradas para o ninja</span>
+                </td>
+
+                <td>
+                    <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
+                    <a>Alterar</a>
+                    <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

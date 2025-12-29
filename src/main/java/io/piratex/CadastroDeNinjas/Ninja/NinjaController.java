@@ -51,7 +51,7 @@ public class NinjaController {
     @Operation(summary = "Lista um ninja por ID", description = "Usa o id como parametro para listar um ninja especifico")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ninja encontrado"),
-            @ApiResponse(responseCode = "404", description = "Ninja nnao encontrado, verifique o id")
+            @ApiResponse(responseCode = "404", description = "Ninja nao encontrado, verifique o id")
     })
     public ResponseEntity<?> listarNinjasPorId(@PathVariable Long id) {
         NinjaDTO ninja = ninjaService.listarNinjaPorId(id);
@@ -65,7 +65,7 @@ public class NinjaController {
     }
 
     // Atualizar um ninja (UPDATE)
-    @PutMapping("/alterar/{id}")
+    @PatchMapping("/alterar/{id}")
     @Operation(summary = "Altera o ninja por id", description = "Usa o id como parametro para alterar um ninja especifico")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ninja alterado com sucesso"),

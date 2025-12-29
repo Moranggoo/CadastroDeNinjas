@@ -46,8 +46,15 @@ public class NinjaService {
     public NinjaDTO alterarNinjas(Long id, NinjaDTO ninjaDTO) {
         Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
         if (ninjaExistente.isPresent()) {
+            NinjaModel ninja= ninjaRepository.getById(id);
             NinjaModel ninjaAtualizado = ninjaMapper.map(ninjaDTO);
             ninjaAtualizado.setId(id);
+            if (ninjaAtualizado.getNome() == null) ninjaAtualizado.setNome(ninja.getNome());
+            if (ninjaAtualizado.getIdade() == 0) ninjaAtualizado.setIdade(ninja.getIdade());
+            if (ninjaAtualizado.getEmail() == null) ninjaAtualizado.setEmail(ninja.getEmail());
+            if (ninjaAtualizado.getRank() == null) ninjaAtualizado.setRank(ninja.getRank());
+            if (ninjaAtualizado.getImgUrl() == null) ninjaAtualizado.setImgUrl(ninja.getImgUrl());
+            if (ninjaAtualizado.getMissoes() == null) ninjaAtualizado.setMissoes(ninja.getMissoes());
             NinjaModel ninjaSalvo = ninjaRepository.save(ninjaAtualizado);
             return ninjaMapper.map(ninjaSalvo);
         }else  {

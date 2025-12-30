@@ -130,7 +130,7 @@
 
                 <td>
                     <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Ver detalhes</a>
-                    <a>Alterar</a>
+                    <a th:href="@{/ninjas/ui/editar/{id}(id=${ninja.id})}">Alterar</a>
                     <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
                 </td>
             </tr>

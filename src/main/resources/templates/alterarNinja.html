@@ -1,0 +1,138 @@
+<!DOCTYPE>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alterar Ninja</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #eee;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #e53935;
+            border-bottom: 2px solid #333;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #f44336;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #f44336;
+            box-shadow: 0 0 5px #f44336aa;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+            transform: scale(1.02);
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1e88e5;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #64b5f6;
+        }
+
+        .mensagem {
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #2e7d32;
+            color: #fff;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<h1>Alterar Ninja</h1>
+    <div class="form-container">
+        <form th:action="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}" th:method="patch">
+            <label>Nome:</label>
+            <input type="text" id="nome" name="nome" th:value="${ninja.nome}"/>
+
+            <label>Email:</label>
+            <input type="email" id="email" name="email" th:value="${ninja.email}"/>
+
+            <label>Idade:</label>
+            <div th:if="${ninja.idade}">
+                <input type="number" id="idade" name="idade" th:value="${ninja.idade}"/>
+            </div>
+            <div th:unless="${ninja.idade}">
+                <input type="number" id="idade2" name="idade" th:value="0"/>
+            </div>
+
+            <label>URL da imagem:</label>
+            <input type="text" id="imgUrl" name="imgUrl" th:value="${ninja.imgUrl}"/>
+
+            <label>Rank:</label>
+            <input type="text" id="rank" name="rank" th:value="${ninja.rank}"/>
+
+            <label>Id da missao:</label>
+            <div th:if="${ninja.missoes}">
+                <input type="number" id="missoes" name="missoes" th:value="${ninja.missoes.id}"/>
+            </div>
+            <div th:unless="${ninja.missoes}">
+                <input type="number" id="missoes2" name="missoes"/>
+            </div>
+
+            <button type="submit">Atualizar ninja</button>
+        </form>
+        <a th:href="@{/ninjas/ui/listar}">Voltar para lista de ninjas</a>
+    </div>
+</body>

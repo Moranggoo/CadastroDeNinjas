@@ -55,4 +55,18 @@ public class NinjaControllerUi {
         redirectAttributes.addFlashAttribute("mensagem", "Ninja criado com sucesso");
         return "redirect:/ninjas/ui/listar";
     }
+
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioAtualizacao(@PathVariable Long id, Model model) {
+        NinjaDTO ninja = ninjaService.listarNinjaPorId(id);
+        model.addAttribute("ninja", ninja);
+        return "alterarNinja";
+    }
+
+    @PatchMapping("/alterar/{id}")
+    public String alterarNinjas(@PathVariable Long id, @ModelAttribute NinjaDTO ninja, Model model) {
+        ninjaService.alterarNinjas(id, ninja);
+        model.addAttribute("mensagem", "Ninja atualizado com sucesso");
+        return "redirect:/ninjas/ui/listar";
+    }
 }
